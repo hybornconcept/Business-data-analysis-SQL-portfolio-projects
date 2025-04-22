@@ -1,13 +1,44 @@
-<<<<<<< HEAD
 # Contoso Sales Data Analysis Portfolio
 
 ## Project Overview
 A comprehensive analysis of the Contoso retail dataset using PostgreSQL and Python, focusing on various analytical techniques to derive business insights.
 
-## Database
+## Database Schema
+![Contoso Database Schema](Screenshot%202025-04-22%20171824.png)
+
+## Database Details
 - **Name**: contoso_100k
 - **Type**: PostgreSQL
-- **Tables**: sales, product, customer
+- **Tables**: 
+  - `sales`: Transaction records
+  - `product`: Product information
+  - `customer`: Customer demographics and details
+
+## Technical Environment
+
+### Database Connection
+The project uses JupySQL (formerly IPython-SQL) to interact with PostgreSQL database directly in Jupyter notebooks:
+
+```python
+# Import required libraries
+import pandas as pd
+from sqlalchemy import create_engine
+%load_ext sql
+
+# Database connection
+%sql postgresql://postgres:legacy@localhost:5432/contoso_100k
+
+# Enable automatic pandas DataFrame conversion
+%config SqlMagic.autopandas = True
+```
+
+### JupySQL Features Used
+- **Magic Commands**: 
+  - `%%sql`: For multi-line SQL queries
+  - `%sql`: For single-line queries
+- **Automatic DataFrame Conversion**: Results automatically convert to pandas DataFrames
+- **Named Parameters**: Disabled for better compatibility
+- **Direct PostgreSQL Integration**: Native PostgreSQL syntax support
 
 ## Analysis Notebooks
 
@@ -76,10 +107,22 @@ A comprehensive analysis of the Contoso retail dataset using PostgreSQL and Pyth
 - PostgreSQL
 - Python
 - Libraries:
+  - JupySQL (SQL magic commands)
   - Pandas
   - SQLAlchemy
   - Plotly Express
   - IPython SQL Magic
+
+## SQL Techniques Demonstrated
+- Complex JOIN operations
+- Window functions (RANK, ROW_NUMBER, LAG/LEAD)
+- Common Table Expressions (CTEs)
+- Aggregate functions
+- Date/Time manipulations
+- Subqueries and derived tables
+- CASE statements
+- String operations
+- Data type conversions
 
 ## Key Insights
 - Product performance categorization (High, Mid, Low performers)
@@ -110,7 +153,3 @@ A comprehensive analysis of the Contoso retail dataset using PostgreSQL and Pyth
 - Machine learning models
 - Real-time dashboard development
 - Advanced customer segmentation
-=======
-# Business-data-analysis-SQL-portfolio-projects
-A data Analytics Project
->>>>>>> c2d6c1b19d8c2b0bf0ec4a350892e9e12d76e8cb
