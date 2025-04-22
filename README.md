@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Contoso Sales Data Analysis Portfolio
 
 ## Project Overview
@@ -109,3 +110,7 @@ A comprehensive analysis of the Contoso retail dataset using PostgreSQL and Pyth
 - Machine learning models
 - Real-time dashboard development
 - Advanced customer segmentation
+=======
+# Business-data-analysis-SQL-portfolio-projects
+A data Analytics Project
+>>>>>>> c2d6c1b19d8c2b0bf0ec4a350892e9e12d76e8cb
