@@ -1,0 +1,17 @@
+SELECT
+    c.customerkey,
+    c.givenname,
+    c.surname,
+    COUNT(DISTINCT ordernumber) AS total_orders,
+    CAST(
+        SUM(s.quantity * s.netprice * s.exchangerate) / 
+        NULLIF(COUNT(DISTINCT ordernumber), 0) 
+    AS DECIMAL(10,2)) AS average_order_value
+FROM sales s
+LEFT JOIN customer c
+    ON c.customerkey = s.customerkey
+GROUP BY 
+    c.customerkey,
+    c.givenname,
+    c.surname
+ORDER BY total_orders DESC;
