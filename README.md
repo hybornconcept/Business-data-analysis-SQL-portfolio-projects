@@ -1,23 +1,23 @@
 # Contoso Sales Data Analysis Portfolio
 
 ## Project Overview
-A comprehensive analysis of the Contoso retail dataset using PostgreSQL and Python, focusing on various analytical techniques to derive business insights.
+A comprehensive analysis of the Contoso retail dataset using PostgreSQL and Python, demonstrating advanced SQL analytics and data visualization techniques. This project showcases various analytical methodologies to derive actionable business insights from a complex retail dataset.
 
 ## Database Schema
 ![Contoso Database Schema](Screenshot%202025-04-22%20171824.png)
 
 ## Database Details
 - **Name**: contoso_100k
-- **Type**: PostgreSQL
+- **Type**: PostgreSQL 17.4
 - **Tables**: 
-  - `sales`: Transaction records
-  - `product`: Product information
-  - `customer`: Customer demographics and details
+  - `sales`: Transaction records including order dates, quantities, prices, and exchange rates
+  - `product`: Comprehensive product information and categorization
+  - `customer`: Detailed customer demographics and geographical data
 
 ## Technical Environment
 
 ### Database Connection
-The project uses JupySQL (formerly IPython-SQL) to interact with PostgreSQL database directly in Jupyter notebooks:
+The project leverages JupySQL (formerly IPython-SQL) for seamless PostgreSQL integration within Jupyter notebooks:
 
 ```python
 # Import required libraries
@@ -26,7 +26,7 @@ from sqlalchemy import create_engine
 %load_ext sql
 
 # Database connection
-%sql postgresql://postgres:legacy@localhost:5432/contoso_100k
+%sql postgresql://postgres:'your_password'@localhost:5432/contoso_100k
 
 # Enable automatic pandas DataFrame conversion
 %config SqlMagic.autopandas = True
@@ -48,45 +48,101 @@ from sqlalchemy import create_engine
 - Basic data quality checks
 
 ### 2. Time-Based Analysis (`02_change_over_time_analysis.ipynb`)
-- Temporal trends in sales
-- Year-over-year comparisons
-- Seasonal patterns identification
+Examines sales patterns over time to identify growth opportunities and optimize inventory:
+- Analyzes daily/monthly/yearly sales trends to forecast demand
+- Compares performance across different time periods to measure growth
+- Identifies seasonal patterns to optimize stock levels and promotions
+
+SQL Functions Used:
+- `DATE_TRUNC()` for time period aggregation
+- `EXTRACT()` for date component extraction
+- `LAG()` for period-over-period comparisons
+- `AVG()`, `SUM()` for aggregations
+- `INTERVAL` for date arithmetic
 
 ### 3. Cumulative Analysis (`03.cummulative_analysis.ipynb`)
-- Running totals of sales
-- Moving averages
-- Growth trends visualization
+Tracks progressive business performance to understand growth dynamics:
+- Monitors running sales totals to assess progress toward targets
+- Uses moving averages to smooth volatility and spot underlying trends
+- Visualizes growth trajectories to identify acceleration/deceleration periods
+
+SQL Functions Used:
+- `SUM() OVER (ORDER BY date)` for running totals
+- `AVG() OVER (ROWS BETWEEN)` for moving averages
+- `LAG()` for growth rate calculations
+- `PARTITION BY` for segmented analysis
 
 ### 4. Performance Analysis (`04_Performance_analysis.ipynb`)
-- Product performance metrics
-- Year-over-year revenue changes
-- Sales variance analysis
+Evaluates business effectiveness across key metrics:
+- Measures product success through sales, margins, and turnover rates
+- Tracks revenue changes to identify growing/declining product lines
+- Analyzes sales variations to understand performance volatility
+
+SQL Functions Used:
+- `STDDEV()`, `VARIANCE()` for volatility measures
+- `PERCENTILE_CONT()` for distribution analysis
+- `CASE WHEN` for categorical grouping
+- `COUNT()`, `SUM()` for basic metrics
 
 ### 5. Segmentation Analysis (`05_Segmentation_Analysis.ipynb`)
-- Product cost segmentation
-- Distribution analysis
-- Category-based grouping
+Groups products strategically to optimize inventory and pricing:
+- Categorizes products by cost to inform pricing strategies
+- Analyzes distribution patterns to optimize stock levels
+- Groups items by category to identify department performance
+
+SQL Functions Used:
+- `NTILE()` for segmentation
+- `WIDTH_BUCKET()` for range grouping
+- `GROUP BY` with `HAVING` for filtered aggregations
+- `PERCENT_RANK()` for relative positioning
 
 ### 6. Part-to-Whole Analysis (`06_Part_to_whole_Analysis.ipynb`)
-- Category sales distribution
-- Market share analysis
-- Product cost distribution
+Examines relative contributions to understand business composition:
+- Maps category revenue distribution to focus resources
+- Tracks market share evolution to assess competitive position
+- Analyzes cost structures to optimize pricing strategies
+
+SQL Functions Used:
+- `RATIO_TO_REPORT()` for share calculations
+- `SUM() OVER()` for total calculations
+- `ROUND()` for percentage formatting
+- `DECIMAL` casting for precise calculations
 
 ### 7. Rank Analysis (`07_Rank_analysis.ipynb`)
-- Top performing products
-- Customer rankings
-- Revenue-based hierarchies
+Identifies top performers to guide strategic decisions:
+- Highlights best-selling products to optimize inventory
+- Ranks customers by value to guide relationship management
+- Creates revenue hierarchies to focus sales efforts
+
+SQL Functions Used:
+- `RANK()`, `DENSE_RANK()` for ordering
+- `ROW_NUMBER()` for unique ordering
+- `FIRST_VALUE()`, `LAST_VALUE()` for boundary analysis
+- `ORDER BY` with multiple criteria
 
 ### 8. Cohort Analysis (`08_Cohort_analysis.ipynb`)
-- Customer cohort analysis
-- Retention patterns
-- Purchase behavior over time
+Studies customer groups to improve retention strategies:
+- Tracks customer groups over time to measure loyalty
+- Analyzes retention patterns to reduce churn
+- Maps purchase behaviors to predict future activity
+
+SQL Functions Used:
+- `FIRST_VALUE()` for cohort assignment
+- `DATEDIFF()` for time between events
+- `WITH` for complex CTEs
+- `CROSS JOIN` for cohort matrices
 
 ### 9. Customer Analysis (`09_Customer_report.ipynb`)
-- Customer profiling
-- Purchase patterns
-- Value segmentation
+Develops deep customer understanding to enhance relationships:
+- Creates detailed customer profiles for targeted marketing
+- Identifies buying patterns to personalize offerings
+- Segments customers by value to optimize service levels
 
+SQL Functions Used:
+- `STRING_AGG()` for profile concatenation
+- `COUNT(DISTINCT)` for unique counts
+- `PERCENTILE_DISC()` for value segmentation
+- `COALESCE()` for handling nulls
 ## Key Reports
 
 ### Product Report (`product_report.ipynb`)
